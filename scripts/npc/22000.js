@@ -24,9 +24,11 @@
 	Map(s): 		Maple Road : Southperry (60000)
 	Description: 		Brings you to Victoria Island
 */
-var status = 0;
+var status;
 
 function start() {
+status = -1;
+        action(1, 0, 0);
 }
 
 function action(mode, type, selection) {
