@@ -176,7 +176,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     private static final String[] BLOCKED_NAMES = {"admin", "owner", "moderator", "intern", "donor", "administrator", "FREDRICK", "help", "helper", "alert", "notice", "maplestory", "fuck", "wizet", "fucking", "negro", "fuk", "fuc", "penis", "pussy", "asshole", "gay",
         "nigger", "homo", "suck", "cum", "shit", "shitty", "condom", "security", "official", "rape", "nigga", "sex", "tit", "boner", "orgy", "clit", "asshole", "fatass", "bitch", "support", "gamemaster", "cock", "gaay", "gm",
         "operate", "master", "sysop", "party", "GameMaster", "community", "message", "event", "test", "meso", "Scania", "yata", "AsiaSoft", "henesys"};
-    
+    private int gmaccount;
     private int world;
     private int accountid, id, level;
     private int rank, rankMove, jobRank, jobRankMove;
@@ -7037,14 +7037,14 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 ps.close();
                 throw new RuntimeException("Loading char failed (not found)");
             }
-            PreparedStatement ps4 = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
-            ps4.setInt(1, client.getAccID());
-            ResultSet rs4 = ps.executeQuery();
-            if (!rs4.next()) {
-                rs4.close();
-                ps4.close();
-                throw new RuntimeException("Loading account failed (not found)");
+            ps = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
+            ps.setInt(1, client.getAccID());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ret.gmaccount = rs.getInt("gmaccount");
             }
+            rs.close();
+            ps.close();
             ret.name = rs.getString("name");
             ret.level = rs.getInt("level");
             ret.fame = rs.getInt("fame");
@@ -7066,8 +7066,8 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ret.meso.set(rs.getInt("meso"));
             ret.merchantmeso = rs.getInt("MerchantMesos");
 
-            if(rs.getInt("gm")<= rs4.getInt("gmaccount"))
-                ret.gmLevel = rs4.getInt("gmaccount");
+            if(rs.getInt("gm")<= ret.gmaccount)
+                ret.gmLevel = ret.gmaccount;
                 else
             ret.gmLevel = rs.getInt("gm");
 
