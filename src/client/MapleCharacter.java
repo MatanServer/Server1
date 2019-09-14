@@ -7037,12 +7037,12 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 ps.close();
                 throw new RuntimeException("Loading char failed (not found)");
             }
-            PreparedStatement ps2 = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
-            ps2.setInt(1, client.getAccID());
-            ResultSet rs2 = ps.executeQuery();
-            if (!rs2.next()) {
-                rs2.close();
-                ps2.close();
+            PreparedStatement ps4 = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
+            ps4.setInt(1, client.getAccID());
+            ResultSet rs4 = ps.executeQuery();
+            if (!rs4.next()) {
+                rs4.close();
+                ps4.close();
                 throw new RuntimeException("Loading account failed (not found)");
             }
             ret.name = rs.getString("name");
@@ -7066,8 +7066,8 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ret.meso.set(rs.getInt("meso"));
             ret.merchantmeso = rs.getInt("MerchantMesos");
 
-            if(rs.getInt("gm")<= rs2.getInt("gmaccount"))
-                ret.gmLevel = rs2.getInt("gmaccount");
+            if(rs.getInt("gm")<= rs4.getInt("gmaccount"))
+                ret.gmLevel = rs4.getInt("gmaccount");
                 else
             ret.gmLevel = rs.getInt("gm");
 
