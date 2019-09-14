@@ -7037,7 +7037,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 ps.close();
                 throw new RuntimeException("Loading char failed (not found)");
             }
-            ps = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
+            /* ps = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
             ps.setInt(1, client.getAccID());
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -7045,6 +7045,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             }
             rs.close();
             ps.close();
+            */
             ret.name = rs.getString("name");
             ret.level = rs.getInt("level");
             ret.fame = rs.getInt("fame");
@@ -7066,9 +7067,9 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ret.meso.set(rs.getInt("meso"));
             ret.merchantmeso = rs.getInt("MerchantMesos");
 
-            if(rs.getInt("gm")<= ret.gmaccount)
-                ret.gmLevel = ret.gmaccount;
-                else
+           // if(rs.getInt("gm")<= ret.gmaccount)
+               // ret.gmLevel = ret.gmaccount;
+               // else
             ret.gmLevel = rs.getInt("gm");
 
             ret.skinColor = MapleSkinColor.getById(rs.getInt("skincolor"));
