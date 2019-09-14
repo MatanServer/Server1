@@ -6556,6 +6556,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 public void run() {
                     if (leaveParty()) {
                         showHint("You have reached #blevel 10#k, therefore you must leave your #rstarter party#k.");
+                        getClient().getAbstractPlayerInteraction().openNpc(22000);
                     }
                 }
             };
