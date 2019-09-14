@@ -6563,6 +6563,46 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
 
             ThreadManager.getInstance().newTask(r);
         }
+        else if (level == 30) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                        showHint("Congratulations you have reached #blevel 30#k, use @getgift to get your #rfree level 30 gift#k.");
+                }
+            };
+
+            ThreadManager.getInstance().newTask(r);
+        }
+        else if (level == 70) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    showHint("Congratulations you have reached #blevel 70#k, use @getgift to get your #rfree level 70 gift#k.");
+                }
+            };
+
+            ThreadManager.getInstance().newTask(r);
+        }
+        else if (level == 120) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    showHint("Congratulations you have reached #blevel 120#k, use @getgift to get your #rfree level 120 gift#k.");
+                }
+            };
+
+            ThreadManager.getInstance().newTask(r);
+        }
+        else if (level == 200) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    showHint("Congratulations you have reached #blevel 200#k, use @getgift to get your #rfree level 200 gift#k.");
+                }
+            };
+
+            ThreadManager.getInstance().newTask(r);
+        }
 
         levelUpMessages();
         guildUpdate();
