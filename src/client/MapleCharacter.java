@@ -7040,6 +7040,11 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             PreparedStatement ps4 = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
             ps4.setInt(1, client.getAccID());
             ResultSet rs4 = ps.executeQuery();
+            if (!rs4.next()) {
+                rs4.close();
+                ps4.close();
+                throw new RuntimeException("Loading account failed (not found)");
+            }
             ret.name = rs.getString("name");
             ret.level = rs.getInt("level");
             ret.fame = rs.getInt("fame");
