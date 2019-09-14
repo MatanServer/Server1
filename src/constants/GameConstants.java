@@ -32,9 +32,9 @@ public class GameConstants {
     public static final int[] CASH_DATA = new int[]{50200004, 50200069, 50200117, 50100008, 50000047};
     
     // Ronan's rates upgrade system
-    private static final int[] DROP_RATE_GAIN = {1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 11, 12, 13, 14};
-    private static final int[] MESO_RATE_GAIN = {1, 1, 1, 1, 1, 1, 1, 1, 1, 55, 66, 78, 91, 105};
-    private static final int[]  EXP_RATE_GAIN = {1, 10, 10, 10, 10, 10, 10, 10, 10, 89, 144, 233, 377, 610};    //fibonacci :3
+    private static final int[] DROP_RATE_GAIN = {1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 11, 12, 13, 14, 11, 12, 13, 14, 11, 12, 13, 14, 11, 12, 13, 14, 11, 12, 13, 14};
+    private static final int[] MESO_RATE_GAIN = {1, 1, 1, 1, 1, 1, 1, 1, 1, 55, 66, 78, 91, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105};
+    private static final int[]  EXP_RATE_GAIN = {1, 10, 10, 10, 10, 10, 10, 10, 10, 89, 144, 233, 377, 610, 610, 610, 610, 610, 610, 610, 610, 610, 610, 610, 610, 610};    //fibonacci :3
     
     private static final int[] jobUpgradeBlob = {1, 20, 60, 110, 190};
     private static final int[] jobUpgradeSpUp = {0, 1, 2, 3, 6};
