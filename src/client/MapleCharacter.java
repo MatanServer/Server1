@@ -6687,9 +6687,6 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     }
     
     public void setPlayerRates() {
-        if (level < 10)
-            this.expRate *= 1;
-        else
         this.expRate  *=  GameConstants.getPlayerBonusExpRate(this.level / 10);
         this.mesoRate *= GameConstants.getPlayerBonusMesoRate(this.level / 10);
         this.dropRate *= GameConstants.getPlayerBonusDropRate(this.level / 10);
