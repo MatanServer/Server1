@@ -176,6 +176,16 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     private static final String[] BLOCKED_NAMES = {"admin", "owner", "moderator", "intern", "donor", "administrator", "FREDRICK", "help", "helper", "alert", "notice", "maplestory", "fuck", "wizet", "fucking", "negro", "fuk", "fuc", "penis", "pussy", "asshole", "gay",
         "nigger", "homo", "suck", "cum", "shit", "shitty", "condom", "security", "official", "rape", "nigga", "sex", "tit", "boner", "orgy", "clit", "asshole", "fatass", "bitch", "support", "gamemaster", "cock", "gaay", "gm",
         "operate", "master", "sysop", "party", "GameMaster", "community", "message", "event", "test", "meso", "Scania", "yata", "AsiaSoft", "henesys"};
+
+    public int getGiftnumber() {
+        return giftnumber;
+    }
+
+    public void setGiftnumber(int giftnumber) {
+        this.giftnumber = giftnumber;
+    }
+
+    private int giftnumber;
     private int gmaccount;
     private int world;
     private int accountid, id, level;
@@ -6989,6 +6999,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ret.rankMove = rs.getInt("rankMove");
             ret.jobRank = rs.getInt("jobRank");
             ret.jobRankMove = rs.getInt("jobRankMove");
+            ret.giftnumber = rs.getInt("giftnumber");
             
             if(equipped != null) {  // players can have no equipped items at all, ofc
                 MapleInventory inv = ret.inventory[MapleInventoryType.EQUIPPED.ordinal()];
@@ -7035,7 +7046,8 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         ret.initialSpawnPoint = this.getInitialSpawnpoint();
         
         ret.inventory[MapleInventoryType.EQUIPPED.ordinal()] = this.getInventory(MapleInventoryType.EQUIPPED);
-        
+
+        ret.giftnumber = this.getGiftnumber();
         ret.gmLevel = this.gmLevel();
         ret.world = this.getWorld();
         ret.rank = this.getRank();
@@ -7111,6 +7123,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
            // if(rs.getInt("gm")<= ret.gmaccount)
                // ret.gmLevel = ret.gmaccount;
                // else
+            ret.giftnumber = rs.getInt("giftnumber");
             ret.gmLevel = rs.getInt("gm");
 
             ret.skinColor = MapleSkinColor.getById(rs.getInt("skincolor"));
@@ -8426,7 +8439,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
             con.setAutoCommit(false);
             PreparedStatement ps;
-            ps = con.prepareStatement("UPDATE characters SET level = ?, fame = ?, str = ?, dex = ?, luk = ?, `int` = ?, exp = ?, gachaexp = ?, hp = ?, mp = ?, maxhp = ?, maxmp = ?, sp = ?, ap = ?, gm = ?, skincolor = ?, gender = ?, job = ?, hair = ?, face = ?, map = ?, meso = ?, hpMpUsed = ?, spawnpoint = ?, party = ?, buddyCapacity = ?, messengerid = ?, messengerposition = ?, mountlevel = ?, mountexp = ?, mounttiredness= ?, equipslots = ?, useslots = ?, setupslots = ?, etcslots = ?,  monsterbookcover = ?, vanquisherStage = ?, dojoPoints = ?, lastDojoStage = ?, finishedDojoTutorial = ?, vanquisherKills = ?, matchcardwins = ?, matchcardlosses = ?, matchcardties = ?, omokwins = ?, omoklosses = ?, omokties = ?, dataString = ?, fquest = ?, jailexpire = ?, partnerId = ?, marriageItemId = ?, lastExpGainTime = ?, ariantPoints = ?, partySearch = ? WHERE id = ?", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("UPDATE characters SET level = ?, fame = ?, str = ?, dex = ?, luk = ?, `int` = ?, exp = ?, gachaexp = ?, hp = ?, mp = ?, maxhp = ?, maxmp = ?, sp = ?, ap = ?, gm = ?, skincolor = ?, gender = ?, job = ?, hair = ?, face = ?, map = ?, meso = ?, hpMpUsed = ?, spawnpoint = ?, party = ?, buddyCapacity = ?, messengerid = ?, messengerposition = ?, mountlevel = ?, mountexp = ?, mounttiredness= ?, equipslots = ?, useslots = ?, setupslots = ?, etcslots = ?,  monsterbookcover = ?, vanquisherStage = ?, dojoPoints = ?, lastDojoStage = ?, finishedDojoTutorial = ?, vanquisherKills = ?, matchcardwins = ?, matchcardlosses = ?, matchcardties = ?, omokwins = ?, omoklosses = ?, omokties = ?, dataString = ?, fquest = ?, jailexpire = ?, partnerId = ?, marriageItemId = ?, lastExpGainTime = ?, ariantPoints = ?, partySearch = ?, giftnumber = ? WHERE id = ?", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, level);    // thanks CanIGetaPR for noticing an unnecessary "level" limitation when persisting DB data
             ps.setInt(2, fame);
             
@@ -8538,7 +8551,8 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ps.setTimestamp(53, new Timestamp(lastExpGainTime));
             ps.setInt(54, ariantPoints);
             ps.setBoolean(55, canRecvPartySearchInvite);
-            ps.setInt(56, id);
+            ps.setInt(56,giftnumber);
+            ps.setInt(57, id);
 
             int updateRows = ps.executeUpdate();
             ps.close();
