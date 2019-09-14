@@ -7037,6 +7037,14 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
                 ps.close();
                 throw new RuntimeException("Loading char failed (not found)");
             }
+            PreparedStatement ps2 = con.prepareStatement("SELECT * FROM accounts WHERE id = ?");
+            ps2.setInt(1, client.getAccID());
+            ResultSet rs2 = ps.executeQuery();
+            if (!rs2.next()) {
+                rs2.close();
+                ps2.close();
+                throw new RuntimeException("Loading account failed (not found)");
+            }
             ret.name = rs.getString("name");
             ret.level = rs.getInt("level");
             ret.fame = rs.getInt("fame");
@@ -7057,7 +7065,12 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             ret.loadCharSkillPoints(rs.getString("sp").split(","));
             ret.meso.set(rs.getInt("meso"));
             ret.merchantmeso = rs.getInt("MerchantMesos");
+
+            if(rs.getInt("gm")<= rs2.getInt("gmaccount"))
+                ret.gmLevel = rs2.getInt("gmaccount");
+                else
             ret.gmLevel = rs.getInt("gm");
+
             ret.skinColor = MapleSkinColor.getById(rs.getInt("skincolor"));
             ret.gender = rs.getInt("gender");
             ret.job = MapleJob.getById(rs.getInt("job"));
